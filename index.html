@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>网格工位 · 代码编辑所</title>
+  <meta name="description" content="瑞士栅格风的本地代码编辑工具：语法高亮编辑器、文本对比、代码统计、片段库。全部在浏览器内运行。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="desk">
+
+    <!-- 报头 -->
+    <header class="masthead">
+      <div class="brand">
+        <h1>网 格 工 位</h1>
+        <p>CODE DESK · GRID NO.20 · LOCAL ONLY</p>
+      </div>
+      <div class="meta">
+        <span class="dot"></span>
+        <span id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <!-- 栏目 -->
+    <nav class="menu" id="menu">
+      <button class="m active" data-t="ed"><i>01</i>编辑器</button>
+      <button class="m" data-t="diff"><i>02</i>文本对比</button>
+      <button class="m" data-t="stat"><i>03</i>代码统计</button>
+      <button class="m" data-t="snip"><i>04</i>片段库</button>
+    </nav>
+
+    <main>
+
+      <!-- ═══ 01 编辑器 ═══ -->
+      <section class="pane" id="ed">
+        <div class="tool-head">
+          <h2>01 — 编辑器</h2>
+          <div class="tools">
+            <button class="b" id="fNew">＋ 新建文件</button>
+            <button class="b" id="fRun">▶ 运行预览</button>
+          </div>
+        </div>
+
+        <div class="filebar" id="fileTabs"></div>
+
+        <div class="ed-wrap">
+          <div class="gutter"><div class="gutter-in" id="gutterIn"></div></div>
+          <div class="ed-box">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="code" spellcheck="false" wrap="off" autocapitalize="off" autocomplete="off"></textarea>
+          </div>
+        </div>
+
+        <div class="stbar">
+          <span id="stPos">Ln 1 · Col 1</span>
+          <span id="stCnt">0 行 · 0 字符</span>
+          <span id="stLang">语法 —</span>
+        </div>
+
+        <div class="pv" id="preview" hidden>
+          <div class="pv-bar">
+            <span id="pvName">预览</span>
+            <button class="b sm" id="pvClose">✕ 关闭</button>
+          </div>
+          <iframe id="pvFrame" sandbox="allow-scripts"></iframe>
+        </div>
+      </section>
+
+      <!-- ═══ 02 文本对比 ═══ -->
+      <section class="pane" id="diff" hidden>
+        <div class="tool-head">
+          <h2>02 — 文本对比</h2>
+          <button class="b" id="dGo">开始对比</button>
+        </div>
+        <div class="diff-io">
+          <div class="dio">
+            <label>版本 A</label>
+            <textarea id="da" spellcheck="false" placeholder="粘贴旧版本……"></textarea>
+          </div>
+          <div class="dio">
+            <label>版本 B</label>
+            <textarea id="db" spellcheck="false" placeholder="粘贴新版本……"></textarea>
+          </div>
+        </div>
+        <div class="diff-out" id="dOut"></div>
+      </section>
+
+      <!-- ═══ 03 代码统计 ═══ -->
+      <section class="pane" id="stat" hidden>
+        <div class="tool-head">
+          <h2>03 — 代码统计</h2>
+          <button class="b" id="sGo">分析当前文件</button>
+        </div>
+        <div class="stat-grid" id="sGrid"></div>
+        <div class="stat-tok">
+          <h3>高频词 TOP 8</h3>
+          <ul id="sTok"></ul>
+        </div>
+        <p class="stat-note" id="sNote"></p>
+      </section>
+
+      <!-- ═══ 04 片段库 ═══ -->
+      <section class="pane" id="snip" hidden>
+        <div class="tool-head">
+          <h2>04 — 片段库</h2>
+        </div>
+        <ul class="snips" id="snipList"></ul>
+        <div class="snip-new">
+          <input id="snName" maxlength="16" placeholder="片段名，如：节流函数" />
+          <textarea id="snCode" rows="4" spellcheck="false" placeholder="片段内容……"></textarea>
+          <button class="b" id="snSave">存入片段库</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
